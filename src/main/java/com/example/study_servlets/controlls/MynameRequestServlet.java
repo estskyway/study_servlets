@@ -26,7 +26,7 @@ public class MynameRequestServlet extends HttpServlet{
           "</head>\r\n" + //
           "<body>\r\n" + //
           "  <div>input your name</div>\r\n" + //
-          "  <form action=\"http://192.168.0.221:8080/getRequestParamsServlet\" method=\"get\">\r\n" + //
+          "  <form action=\"/getRequestParamsServlet\" method=\"get\">\r\n" + //
           "  <div>first name : <input type=\"text\" name=\"first_name\"></div>\r\n" + //
           "  <div>second name : <input type=\"text\" name=\"second_name\"></div>\r\n" + //
           "  <div><button type=\"submit\">\uBCF4\uB0B4\uAE30</button></div>\r\n" + //
