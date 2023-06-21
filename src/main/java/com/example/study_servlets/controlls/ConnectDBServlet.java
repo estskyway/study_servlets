@@ -49,7 +49,6 @@ public class ConnectDBServlet extends HttpServlet{
                     "                </tr>\r\n" + //
                     "            </thead>\r\n" ;
                            
-
             // - query Edit
             Statement statement = connection.createStatement();
             String quary = "SELECT * FROM factorys";
@@ -64,10 +63,8 @@ public class ConnectDBServlet extends HttpServlet{
                     "                <tr>\r\n" + //
                     "                    <td>"+resultSet.getString("COMPANY_ID")+"</td>\r\n" + //
                     "                    <td>"+resultSet.getString("COMPANY")+"</td>\r\n" + //
-                    "                </tr>\r\n" ;
-                    
+                    "                </tr>\r\n" ;  
             }
-
             contents =  contents +  
                     "          </tbody>\r\n" + //
                     "        </table>\r\n" + //
@@ -79,6 +76,8 @@ public class ConnectDBServlet extends HttpServlet{
                     "</html>";
 
             // 클라이언트에 html 화면 제공
+            response.setContentType("text/html;charset=UTF-8"); // 깨지는 한글을 고쳐줌
+
             PrintWriter printWriter = response.getWriter();
             printWriter.println(contents);
             printWriter.close();
@@ -118,10 +117,8 @@ public class ConnectDBServlet extends HttpServlet{
                     "WHERE COMPANY_ID = '" + update_company_id + "' ";
             int count = statement.executeUpdate(quary);
 
-
             // DELETE FROM factorys
             // WHERE COMPANY_ID = 'CAR-01' ;
-
             String delete_company_id = "CAR-01";
             quary= "DELETE FROM factorys " +
                     "WHERE COMPANY_ID = '" + delete_company_id + "' " ;
