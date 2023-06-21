@@ -1,6 +1,7 @@
 package com.example.study_servlets.controlls;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = "/connectDBServlet")
 public class ConnectDBServlet extends HttpServlet{
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             // - MySQL workbench 실행 : JDBC
             // - User/password와 접속 IP:port 접속
@@ -26,6 +27,29 @@ public class ConnectDBServlet extends HttpServlet{
             Connection connection = DriverManager.getConnection(url, user, password);
             System.out.println("DB연결 성공\n");
 
+            // 클라이언트에 html 화면 제공
+            String contents = "<!DOCTYPE html>\r\n" + //
+                    "<html lang=\"en\">\r\n" + //
+                    "\r\n" + //
+                    "<head>\r\n" + //
+                    "    <meta charset=\"UTF-8\">\r\n" + //
+                    "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n" + //
+                    "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n" + //
+                    "    <title>bootstrap_tables</title>\r\n" + //
+                    "    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css\">\r\n" + //
+                    "</head>\r\n" + //
+                    "\r\n" + //
+                    "<body>\r\n" + //
+                    "    <div class=\"container\">\r\n" + //
+                    "        <table class=\"table table-bordered table-hover\">\r\n" + //
+                    "            <thead>\r\n" + //
+                    "                <tr>\r\n" + //
+                    "                    <th>COMPANY_ID</th>\r\n" + //
+                    "                    <th>COMPANY</th>\r\n" + //
+                    "                </tr>\r\n" + //
+                    "            </thead>\r\n" ;
+                           
+
             // - query Edit
             Statement statement = connection.createStatement();
             String quary = "SELECT * FROM factorys";
@@ -35,7 +59,29 @@ public class ConnectDBServlet extends HttpServlet{
                 System.out.println( 
                 resultSet.getString("COMPANY_ID")
                 +resultSet.getString("COMPANY"));
+                contents =  contents +  
+                    "            <tbody>\r\n" + //
+                    "                <tr>\r\n" + //
+                    "                    <td>"+resultSet.getString("COMPANY_ID")+"</td>\r\n" + //
+                    "                    <td>"+resultSet.getString("COMPANY")+"</td>\r\n" + //
+                    "                </tr>\r\n" ;
+                    
             }
+
+            contents =  contents +  
+                    "          </tbody>\r\n" + //
+                    "        </table>\r\n" + //
+                    "    </div>\r\n" + //
+                    "\r\n" + //
+                    "</body>\r\n" + //
+                    "<script src=\"https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js\"></script>\r\n" + //
+                    "\r\n" + //
+                    "</html>";
+
+            // 클라이언트에 html 화면 제공
+            PrintWriter printWriter = response.getWriter();
+            printWriter.println(contents);
+            printWriter.close();
 
             // SELECT COUNT(*) AS CNT FROM factorys;
 
