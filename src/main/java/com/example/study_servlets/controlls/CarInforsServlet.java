@@ -68,14 +68,14 @@ public class CarInforsServlet  extends HttpServlet{
             }
 
           
-            // DELETE FROM factorys
-            // WHERE COMPANY_ID = 'CAR-01' ;
+            // DELETE FROM car_infors
+            // WHERE CAR_NAME = 'sanghun' ;
 
-            // String delete_company_id = "CAR-01";
-            // quary= "DELETE FROM factorys " +
-            //         "WHERE COMPANY_ID = '" + delete_company_id + "' " ;
-            // count = statement.executeUpdate(quary);
-            // System.out.println();
+            String delete_car_name = "sanghun";
+            query= "DELETE FROM car_infors " +
+                    "WHERE CAR_NAME = '" + delete_car_name + "' " ;
+            count = statement.executeUpdate(query);
+            System.out.println();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
