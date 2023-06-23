@@ -25,14 +25,21 @@ public class SessionCreateServlet extends HttpServlet {
             PrintWriter printWriter = response.getWriter();
             printWriter.println("<div>Create Session Servlets</div>");
             // login
-            if ("yojulab".equals(username) && "1234".equals(password)) {
-                HttpSession httpSession = request.getSession();
-                httpSession.setAttribute("username", username);
-                httpSession.setAttribute("password", password);
-                printWriter.println("<div>" + username + ", " + password + "</div>");
-            } else {
-                printWriter.println("<div>Faild</div>");
+            HttpSession httpSession = request.getSession(false);
+            if (httpSession != null) { // JSESSION 있음.    - 로그인 되었다는 표시
+                String usernameSession = (String)httpSession.getAttribute("username");
+                printWriter.println("<div>username : "+usernameSession+"</div>");
+            } else { // 없음 - 로그인
+                if ("yojulab".equals(username) && "1234".equals(password)) {
+                    httpSession = request.getSession();
+                    httpSession.setAttribute("username", username);
+                    httpSession.setAttribute("password", password);
+                    printWriter.println("<div>" + username + ", " + password + "</div>");
+                } else {
+                    printWriter.println("<div>Faild</div>");
+                }
             }
+
             printWriter.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
