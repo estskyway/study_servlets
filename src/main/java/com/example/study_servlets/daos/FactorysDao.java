@@ -5,6 +5,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.study_servlets.commons.Commons;
+
 public class FactorysDao {
     public ArrayList selectAll() {
         ArrayList arrayList = new ArrayList();

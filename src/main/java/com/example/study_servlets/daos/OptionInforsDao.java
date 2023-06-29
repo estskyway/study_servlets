@@ -5,6 +5,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.example.study_servlets.commons.Commons;
+
 public class OptionInforsDao {
     public int UpdateWithUniqueID(String unique_id) {
         int count = 0;
