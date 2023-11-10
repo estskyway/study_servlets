@@ -48,8 +48,8 @@
     </div>
     <div class="container bg-white fs-6 py-6 row mx-auto my-3">
         <div class="text-center d-flex justify-content-center py-2">
-            <button type="submit" formaction="" class=" btn btn-white mx-2 btn-outline-dark">닫기</button>
-            <button type="submit" formaction="" class="btn btn-white btn-outline-dark bg-info">설문 제출</button>
+            <button type="reset"  class=" btn btn-white mx-2 btn-outline-dark">원래대로</button>
+            <button type="submit"  class="btn btn-white btn-outline-dark bg-info">설문 제출</button>
         </div>
     </form>
 </body>
